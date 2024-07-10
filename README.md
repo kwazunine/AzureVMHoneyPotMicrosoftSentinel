@@ -1,7 +1,7 @@
 <h1>Azure VM Honeypot | Microsoft Sentinel 'SIEM'</h1>
 
 <h2>Description</h2>
-This project involves configuring a honeypot on a Microsoft Azure virtual machine to generate failed Remote Desktop Protocol 'RDP' login event logs and utilizing Microsoft Sentinel to visualize and map the login attempts geogprahically. 
+This project involves configuring a honeypot on a Microsoft Azure virtual machine to generate failed Remote Desktop Protocol 'RDP' login event logs with the help of a running PowerSHell script. Utilizing Microsoft Sentinel, the failed login attempts are visualized and mapped geogprahically. 
 <br />
 
 <h2>Technologies & Utilities Used</h2>
@@ -51,5 +51,17 @@ Connecting the honeyot VM to Log Analytics workspace. <br/>
 <br />
 Lastly, Microsoft Sentinel is connected to the Log Analytics workspace to visualize the RDP failed login data collected within it. <br/>
 <img src="https://i.imgur.com/oJt930C.png" height="100%" width="100%" alt="Add Microsoft Sentinel to Log Analytics workspace"/>
+<br />
+</p>
+
+<h3 align="center">RDP to Honeypot & Create Failed Login Attempts Events</h3>
+<p align="center">
+Acessing honeypot VM via its public IP address '172.210.40.214' with RDP. <br/>
+<img src="https://i.imgur.com/S56OAQK.png" height="80%" width="80%" alt="Create VM"/>
+<br />
+<img src="https://i.imgur.com/FqhkXTN.png" height="80%" width="80%" alt="Create VM NIC Security Group Advanced"/>
+<br />
+The Windows Event Viewer shows security events, including one of the purposely failed RDP login attempts highligthed in the image below. The PowerShell script will retrieve 'Event ID: 4625' security logs from the Windows Event Viewer to gather information for the failed RDP login logs that it will generate. <br/>
+<img src="https://i.imgur.com/yBMzYmD.png" height="100%" width="100%" alt="Create VM Newtwork Security Group"/>
 <br />
 </p>
