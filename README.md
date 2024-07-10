@@ -6,8 +6,10 @@ This project involves configuring a honeypot on a Microsoft Azure virtual machin
 
 <h2>Technologies & Utilities Used</h2>
 
+- <b>Event Viewer</b>
 - <b>IP Gealocation API</b>
 - <b>Microsoft Azure Log Analytics workspaces</b>
+- <b>Microsoft Defender for Cloud</b>
 - <b>Microsoft Sentinel</b>
 - <b>Windows PowerShell ISE</b>
 
