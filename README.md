@@ -101,17 +101,6 @@ Query transforming the raw data into custom fields which will be visualized in t
 <br />
 </p>
 
-<h3 align="center">Upload Failed RDP Login Log Data to Log Analytics workspace</h3>
-<p align="center">
-To enable querying of the raw data in the 'failed.rdp' log, it needs to be uploaded from the local machine (not the VM) into the Log Analytics workspace. <br/>
-<img src="https://i.imgur.com/UOm5bP5.png" height="80%" width="80%" alt="Create Custom Log Query in Log Analytics workspace"/>
-<br />
-<img src="https://i.imgur.com/XG0KJ8r.png" height="80%" width="80%" alt="Create Custom Log Query in Log Analytics workspace Name"/>
-<br />
-<img src="https://i.imgur.com/npu8uX7.png" height="80%" width="80%" alt="Create Workbook in Microsoft Sentine to make Failed RDP Login Map"/>
-<br />
-</p>
-
 <h3 align="center">Configure Microsoft Sentinel Workspace & Workbook</h3>
 <p align="center">
 The Log Analytics workspace gets added into Microsoft Sentinel first. <br/>
