@@ -1,12 +1,12 @@
 <h1>Azure VM Honeypot | Microsoft Sentinel 'SIEM'</h1>
 
 <h2>Description</h2>
-This project involves configuring a honeypot on a Microsoft Azure virtual machine to generate failed Remote Desktop Protocol 'RDP' login event logs with the help of a running PowerSHell script. Utilizing Microsoft Sentinel, the failed login attempts are visualized and mapped geogprahically. 
+This project involves configuring a honeypot on a Microsoft Azure virtual machine to generate failed Remote Desktop Protocol 'RDP' login event logs with the help of a running PowerShell script. Utilizing Microsoft Sentinel, the failed login attempts are visualized and mapped geographically. 
 <br />
 
 <h2>Technologies & Utilities Used</h2>
 
-- <b>IP Gealocation API</b>
+- <b>IP Geolocation API</b>
 - <b>Microsoft Azure Log Analytics workspaces</b>
 - <b>Microsoft Defender for Cloud</b>
 - <b>Microsoft Sentinel</b>
@@ -15,7 +15,7 @@ This project involves configuring a honeypot on a Microsoft Azure virtual machin
 
 <h2>Operating Systems Used</h2>
 
-- <b>Windows 10 Professional</b> (21H2)
+- <b>Windows 10 Professional</b> (22H2)
 
 <h2>Prerequisites</h2>
 
@@ -40,13 +40,13 @@ Configure an inbound security rule to allow connections to and from any IP addre
 Naming and creating the Log Analytics workspace instance. The Log Analytics workspace will be utilized to ingest the failed RDP logins log data from the honeypot VM.<br/>
 <img src="https://i.imgur.com/eTTEBP5.png" height="80%" width="80%" alt="Create Log Analytics workspace"/>
 <br />
-Enable Micorsoft Defender for Cloud with the the Log Analytics workspace in order to gather logs from the honeypot VM. <br/>
+Enable Microsoft Defender for Cloud with the Log Analytics workspace to gather logs from the honeypot VM. <br/>
 <img src="https://i.imgur.com/7s5dRFM.png" height="80%" width="80%" alt="Microsoft Defender for Cloud Enable Plan"/>
 <br />
 Turn on 'All Events' data collection for Windows security events generated on the honeypot VM. <br/>
 <img src="https://i.imgur.com/pnjp5FU.png" height="80%" width="80%" alt="Microsoft Denfender for Cloud Enable Data Collection"/>
 <br />
-Connecting the honeyot VM to Log Analytics workspace. <br/>
+Connecting the honeypot VM to Log Analytics workspace. <br/>
 <img src="https://i.imgur.com/88EPqL7.png" height="80%" width="80%" alt="Connect VM to Log Analytics workspace"/>
 <br />
 Lastly, Microsoft Sentinel is connected to the Log Analytics workspace to visualize the RDP failed login data collected within it. <br/>
@@ -56,12 +56,12 @@ Lastly, Microsoft Sentinel is connected to the Log Analytics workspace to visual
 
 <h3 align="center">RDP to Honeypot & Create Failed Login Attempts Events</h3>
 <p align="center">
-Acessing honeypot VM via its public IP address '172.210.40.214' with RDP. <br/>
+Accessing honeypot VM via its public IP address '172.210.40.214' with RDP. <br/>
 <img src="https://i.imgur.com/S56OAQK.png" height="80%" width="80%" alt="RDP to VM"/>
 <br />
 <img src="https://i.imgur.com/FqhkXTN.png" height="80%" width="80%" alt="RDP to VM Login"/>
 <br />
-The Windows Event Viewer shows security events, including one of the purposely failed RDP login attempts highligthed in the image below. The PowerShell script will retrieve these 'Event ID: 4625' security logs from the Windows Event Viewer to gather information for the failed RDP login logs that it will generate. <br/>
+The Windows Event Viewer shows security events, including one of the purposely failed RDP login attempts highlighted in the image below. The PowerShell script will retrieve these 'Event ID: 4625' security logs from the Windows Event Viewer to gather information for the failed RDP login logs that it will generate. <br/>
 <img src="https://i.imgur.com/MStq5tk.png" height="100%" width="100%" alt="Event Viewer Failed RDP Login Test"/>
 <br />
 </p>
@@ -69,12 +69,13 @@ The Windows Event Viewer shows security events, including one of the purposely f
 <h3 align="center">PowerShell Script</h3>
 <p align="center">
 The PowerShell script is now loaded into the Windows PowerShell ISE. Its primary function is to generate a log containing details of each failed RDP login attempt, including the username, source IP address, and timestamp. Additionally, it utilizes an IP Geolocation API to enrich the log with information such as latitude, longitude, state, and country corresponding to each IP address. <br/>
+<a href="https://github.com/joshmadakor1/AD_PS/blob/master/Generate-Names-Create-Users.ps1](https://github.com/joshmadakor1/Sentinel-Lab/blob/main/Custom_Security_Log_Exporter.ps1">PowerShell Script Code Source</a> <br/>
 <img src="https://i.imgur.com/dnKbXkU.png" height="100%" width="100%" alt="Load Event Viewer PowerShell Script"/>
 <br />
-Output of the PowerShell script after being started. It shows the purposely failed login RDP attempts from earlier and the assoacted information.
+Output of the PowerShell script after being started. It shows the purposely failed login RDP attempts from earlier and the associated information.
 <img src="https://i.imgur.com/MM3wumO.png" height="100%" width="100%" alt="Event Viewer PowerShell Script Output"/>
 <br />
-Inspecting the 'failed.rdp' log generated by the PowerShell script, found in the ProgramData folder of the honeypot VM. The script includes extra sample data, resulting in more information than just the three intentionally failed RDP login attempts. <br/>
+Inspecting the 'failed.rdp' log generated by the PowerShell script, found in the Program Data folder of the honeypot VM. The script includes extra sample data, resulting in more information than just the three intentionally failed RDP login attempts. <br/>
 <img src="https://i.imgur.com/a0te0DB.png" height="100%" width="100%" alt="Event Viewer PowerShell Script RDP Log"/>
 <br />
 </p>
@@ -92,7 +93,7 @@ To enable querying of the raw data in the 'failed.rdp' log, it needs to be uploa
 
 <h3 align="center">Transform Raw Failed RDP Login Log Data in to Custom Fields</h3>
 <p align="center">
-The failed.rdp' log showing the inegested data in the Log Analytics workspace.
+The failed.rdp' log showing the ingested data in the Log Analytics workspace.
 <img src="https://i.imgur.com/jGLHYrh.png" height="80%" width="80%" alt="Testing Custom Log Query in Log Analytics workspace"/>
 <br />
 Query transforming the raw data into custom fields which will be visualized in the Microsoft Sentinel SIEM. <br/>
